@@ -11,7 +11,8 @@ namespace wzorzecProjektowy
         static void Main(string[] args)
         {
             Pracownik tester = new Pracownik();
-            tester.SetImieNazwisko("Rafał Ściblak")
+            tester.SetIDPracownik(453678635)
+                .SetImieNazwisko("Rafał Ściblak")
                 .SetNumerTelefonu(506190432)
                 .SetWiek(25)
                 .SetWynagrodzenie(5000);
@@ -25,6 +26,7 @@ namespace wzorzecProjektowy
 
     class Pracownik
     {
+        long IDPracownik;
         string imieNazwisko;
         int numerTelefonu;
         byte wiek;
@@ -33,14 +35,16 @@ namespace wzorzecProjektowy
 
         public Pracownik()
         {
+            IDPracownik = 0;
             imieNazwisko = "";
             numerTelefonu = 0;
             wiek = 0;
             wynagrodzenie = 0;
         }
 
-        public Pracownik(string _imieNazwisko, int _numerTelefonu, byte _wiek, int _wynagrodzenie)
+        public Pracownik(long _IDPracownik,string _imieNazwisko, int _numerTelefonu, byte _wiek, int _wynagrodzenie)
         {
+            IDPracownik = _IDPracownik;
             imieNazwisko = _imieNazwisko;
             numerTelefonu = _numerTelefonu;
             wiek = _wiek;
@@ -48,6 +52,11 @@ namespace wzorzecProjektowy
         }
 
         //Gettery
+        public long GetIDPracownik()
+        {
+            return IDPracownik;
+        }
+
         public string GetImieNazwisko()
         {
             return imieNazwisko;
@@ -69,6 +78,15 @@ namespace wzorzecProjektowy
         }
 
         //Settery
+        public Pracownik SetIDPracownik(long _IDPracownik)
+        {
+            if (_IDPracownik < 0)
+                throw new System.ArgumentException("ID musi być większe od 0.");
+            else
+                IDPracownik = _IDPracownik;
+            return this;
+        }
+
         public Pracownik SetImieNazwisko(string _imieNazwisko)
         {
             if (_imieNazwisko.Length < 10)
@@ -105,21 +123,38 @@ namespace wzorzecProjektowy
 
     class Pracodawca
     {
+        long IDPracodawca;
         List<Pracownik> listaPracownikow;
 
         public Pracodawca()
         {
+            IDPracodawca = 0;
             listaPracownikow = new List<Pracownik>();
         }
 
-        public Pracodawca(List<Pracownik> _listaPracownikow)
+        public Pracodawca(long _IDPracodawca, List<Pracownik> _listaPracownikow)
         {
+            IDPracodawca = _IDPracodawca;
             listaPracownikow = _listaPracownikow;
+        }
+
+        public long GetIDPracownik()
+        {
+            return IDPracodawca;
         }
 
         public List<Pracownik> GetListaPracownikow()
         {
             return listaPracownikow;
+        }
+
+        public Pracodawca SetIDPracodawca(long _IDPracodawca)
+        {
+            if (_IDPracodawca < 0)
+                throw new System.ArgumentException("ID musi być większe od 0.");
+            else
+                IDPracodawca = _IDPracodawca;
+            return this;
         }
 
         public Pracodawca SetListaPracownikow(List<Pracownik> _listaPracownikow)
