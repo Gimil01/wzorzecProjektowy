@@ -19,6 +19,7 @@ namespace wzorzecProjektowy
 
             Pracodawca pracodawca = new Pracodawca();
             pracodawca.AddPracownik(tester);
+
             Console.WriteLine(pracodawca.GetListaPracownikow().ElementAt(0).GetImieNazwisko());
             Console.ReadKey();
         }
